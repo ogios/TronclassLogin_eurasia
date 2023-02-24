@@ -148,10 +148,10 @@ class Login:
         # with open("./login.js", "r") as f:
         #     js = execjs.compile(f.read())
         # pwd = js.call("encryptPassword", password, dic["salt"])
-        pwd = encrypt.encrypt(password, dic["salt"])
+        pwd = encrypt.encrypt(self.password, dic["salt"])
 
         data = {
-            "username": username,
+            "username": self.username,
             "password": pwd,
             "captcha": "",
             "_eventId": "submit",
