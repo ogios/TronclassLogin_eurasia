@@ -16,18 +16,19 @@ class SSO:
     def get(self, url, params=None, proxies=None, allow_redirects=True):
         res = requests.get(url, params=params, headers=self.headers, cookies=self.cookies, proxies=proxies,
                            allow_redirects=allow_redirects)
-        for i in res.cookies:
-            if i.name == "session":
-                self.cookies.set(i.name, i.value)
+        self.resetCookies(res.cookies)
         return res
 
     def post(self, url, data=None, params=None, proxies=None, allow_redirects=True):
         res = requests.post(url, params=params, data=data, proxies=proxies, headers=self.headers, cookies=self.cookies,
                             allow_redirects=allow_redirects)
-        for i in res.cookies:
-            if i.name == "session":
-                self.cookies.set(i.name, i.value)
+        self.resetCookies(res.cookies)
         return res
+
+    def resetCookies(self, cookies):
+        for i in cookies:
+            if i.name == "session" or i.name == "core.data.console.session":
+                self.cookies.set(i.name, i.value)
 
     def getCookies(self):
         return self.cookies
