@@ -13,6 +13,17 @@ sso这套登录流程... 在最开始那会我什么知识都不懂的时候根�
 抓包之后过程很清晰明朗，属于是通读一遍就知道是怎么个流程。关于密码的加密方式在做打卡程序的时候就已经了解了，是相同的js文件。  
 今天一口气写完之后觉得还可以精简，因为用到js，也就用到pyexecjs，也就是说会调用node环境，但密码实际上只是简单的aes加密而已。我决定用python直接实现得了，这要看懂他的js代码，然后根据加密原理自己写一套python代码，但是我屁都不会，费了一些时间学了原理之后磕磕绊绊的才写出来...
 
+## 前提
+由于用到aes加密，需要windows下载 `pycryptodome` 和 `requests` 库配合使用:
+```bash
+$ pip3 install pycryptodome requests
+```
+linux安装pycrypto
+```bash
+$ pip3 install pycrypto requests
+```
+
+
 ## 登录
 > 主程序 `main.py` 
 创建 `Login` 对象传入学号密码之后直接调用login方法即可
