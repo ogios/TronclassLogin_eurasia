@@ -1,5 +1,6 @@
 from urllib.parse import urlparse
 from pyquery import PyQuery as pq
+from typing import Union
 import requests
 import requests.utils
 import requests.cookies
@@ -7,21 +8,21 @@ import encrypt
 
 
 class SSO:
-    def __init__(self, cookies: requests.cookies.RequestsCookieJar):
+    def __init__(self, cookies: Union[dict, requests.cookies.RequestsCookieJar]):
         self.cookies = cookies
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.50"
         }
 
-    def get(self, url, params=None, proxies=None, allow_redirects=True):
+    def get(self, url, params=None, proxies=None, allow_redirects=True, stream=False):
         res = requests.get(url, params=params, headers=self.headers, cookies=self.cookies, proxies=proxies,
-                           allow_redirects=allow_redirects)
+                           allow_redirects=allow_redirects, stream=stream)
         self.resetCookies(res.cookies)
         return res
 
-    def post(self, url, data=None, params=None, proxies=None, allow_redirects=True):
+    def post(self, url, data=None, params=None, proxies=None, allow_redirects=True, stream=False):
         res = requests.post(url, params=params, data=data, proxies=proxies, headers=self.headers, cookies=self.cookies,
-                            allow_redirects=allow_redirects)
+                            allow_redirects=allow_redirects, stream=stream)
         self.resetCookies(res.cookies)
         return res
 
