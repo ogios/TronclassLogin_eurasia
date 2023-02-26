@@ -14,14 +14,16 @@ class SSO:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.50"
         }
 
-    def get(self, url, params=None, proxies=None, allow_redirects=True, stream=False):
+    def get(self, url, params=None, proxies=None, allow_redirects=True, stream=False, headers=None):
         res = requests.get(url, params=params, headers=self.headers, cookies=self.cookies, proxies=proxies,
                            allow_redirects=allow_redirects, stream=stream)
         self.resetCookies(res.cookies)
         return res
 
-    def post(self, url, data=None, params=None, proxies=None, allow_redirects=True, stream=False):
-        res = requests.post(url, params=params, data=data, proxies=proxies, headers=self.headers, cookies=self.cookies,
+    def post(self, url, data=None, params=None, proxies=None, allow_redirects=True, stream=False, headers=None):
+        if headers is None:
+            headers = self.headers
+        res = requests.post(url, params=params, data=data, proxies=proxies, headers=headers, cookies=self.cookies,
                             allow_redirects=allow_redirects, stream=stream)
         self.resetCookies(res.cookies)
         return res
@@ -185,8 +187,8 @@ if __name__ == "__main__":
     password = 密码
     login = Login(username, password)
     sso = login.login()
-    print("前:",sso.getCookies())
+    print("前:", sso.getCookies())
     test(sso)
-    print("后:",sso.getCookies())
+    print("后:", sso.getCookies())
     test(sso, "http://lms.eurasia.edu/course/155928/content")
     print("后:", sso.getCookies())
