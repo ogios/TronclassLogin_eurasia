@@ -4,7 +4,7 @@ from typing import Union
 import requests
 import requests.utils
 import requests.cookies
-import utils.encrypt as encrypt
+import encrypt as encrypt
 
 
 class SSO:
