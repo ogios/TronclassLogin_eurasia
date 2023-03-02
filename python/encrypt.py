@@ -31,18 +31,3 @@ def encrypt(data, aeskey):
         aeskey,
         randomString(16)
     )
-# data = "YJtyb5Kwtta6mhDQzpAtmYrkKhNsa5H5wF3ajkMf28ff2N4MHhhFsZiFykEES7RD123456"
-# iv = "PyMwrwkybMeH82HG"
-# print(data)
-# print(iv)
-# c = getAesString(
-#     data,
-#     "gxOYlTE45BB1NCMU",
-#     iv
-# )
-# tc = c.decode()
-# print(tc)
-
-
-
-# print(encrypt("123456", "gxOYlTE45BB1NCMU"))
